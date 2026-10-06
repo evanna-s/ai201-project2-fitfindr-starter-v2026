@@ -41,6 +41,12 @@
 
 <!-- Three or four sentences: what a user asks for, and what they get back. -->
 
+FitFindr is a three-tool thrifting agent that finds a listing, works out what it would go with, and writes a caption for it.
+
+A user types what they want in plain language, and FitFindr searches listings.
+
+If it finds one, it suggests 2 to 3 outfits that pair the item with pieces from the user's wardrobe and writes a short caption they could post with the look.
+
 ------------------------------------------------------------------------
 
 ## Tool Inventory
@@ -108,7 +114,7 @@
 
 **Where it lives:** `agent.py::run_agent`
 
-**How the query is parsed:** regex. The word after "size" becomes size. Any number after or before the '\$' sign and after "under", "below", or "max" becomes max_price. Everything else becomes description. If it contains no price, max_price is set to float("inf"). If it contains no size, then size is set to "".
+**How the query is parsed:** regex. The word after "size"(XXS to XXL, US 7, etc...) or a bare size at the end after a comma, becomes size, uppercased. Any number after or before the '\$' sign and after "under", "below", or "max" becomes max_price. Everything else becomes description. If it contains no price, max_price is None. If it contains no size, then size is None.
 
 **What moves through the session:**
 
@@ -139,6 +145,38 @@
 
 ```         
 $ python app.py ask '...'
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  dict with keys: description, size, max_price
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans. Laye…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Score this vintage butterfly baby tee for just $18 on Depop and I am obsessed. The pink and purple print gives…
+
+  Found:    Y2K Baby Tee — Butterfly Print — $18.0 on depop
+
+  Outfit:   Outfit 1: Streetwear Contrast
+Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans. Layer the black cropped zip hoodie on top, left unzipped to show the graphic. Finish with chunky white sneakers and your black crossbody bag for an easy everyday look.
+
+Outfit 2: Model-Off-Duty Grunge
+Wear the Y2K Baby Tee — Butterfly Print tucked into your wide-leg khaki trousers. Add the vintage black denim jacket and anchor the look with black combat boots. Cinch the waist with your brown leather belt to pull the earth tones together. 
+
+Outfit 3: Layered Transition
+Slip the Y2K Baby Tee — Butterfly Print underneath your oversized grey crewneck sweatshirt, letting the pink and purple butterfly hem peek out the bottom. Pair with your baggy straight-leg jeans and chunky white sneakers for a cozy, texture-rich outfit.
+
+  Fit card: Score this vintage butterfly baby tee for just $18 on Depop and I am obsessed. The pink and purple print gives the ultimate Y2K model-off-duty vibe. Can't wait to style this with baggy jeans and chunky sneakers!
+
+0 model calls this session, 2 served from cache
 ```
 
 **The three tools, tested one at a time**
