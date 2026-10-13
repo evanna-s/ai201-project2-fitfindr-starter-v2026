@@ -67,22 +67,41 @@ from tools import search_listings as _search_listings_impl  # noqa: F401 — you
 mcp = FastMCP("fitfindr", log_level="WARNING")
 
 
-# ── TODO: uncomment and fill this in ──────────────────────────────────────────
-#
-# @mcp.tool()
-# def search_listings(
-#     description: str,
-#     size: str | None = None,
-#     max_price: float | None = None,
-# ) -> list[dict]:
-#     """
-#     <-- YOUR DESCRIPTION GOES HERE.
-#
-#         One or two sentences. What does this tool do, what does it need, and
-#         what does it give back when it finds nothing? Written for a reader
-#         who cannot see the code.
-#     """
-#     return _search_listings_impl(description, size, max_price)
+@mcp.tool()
+def search_listings(
+    description: str,
+    size: str | None = None,
+    max_price: float | None = None,
+) -> list[dict]:
+    """
+    Search 40 secondhand clothing listings and return the ones that best 
+    match a description, optionally filtered by size and a maximum price.
+
+    Inputs:
+    - description (string, required): keywords for the item, such as
+      "vintage graphic tee". Filler words like "a", "the", and "for" are
+      ignored. An empty string matches every listing that passes the other
+      filters.
+    - size (string or null, optional): a size such as "M", "L", "W30", or
+      "US 7", case-insensitive. It matches a listing if it equals any
+      slash-separated part of the listing's size, ignoring text in
+      parentheses, so "M" matches "S/M" but "L" does not match
+      "XL (oversized)". Listings sized "One Size" match any size. Null means
+      no size filter.
+    - max_price (number or null, optional): the highest price in US dollars,
+      inclusive, such as 30 or 29.99. Null means no price limit.
+
+    Returns a list of at most 10 listing objects, best match first. Keywords
+    found in the title, category, or style tags count double those found only
+    in the description, brand, or colors; ties go to the lower price. Each
+    object has id, title, description, category, style_tags (list), size,
+    condition, price (number, US dollars), colors (list), brand (string or
+    null), and platform.
+
+    When nothing matches, returns an empty list []. It never returns null
+    and never raises an error for a search with no matches.
+    """
+    return _search_listings_impl(description, size, max_price)
 #
 # ──────────────────────────────────────────────────────────────────────────────
 #

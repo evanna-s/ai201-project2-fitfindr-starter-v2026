@@ -120,15 +120,19 @@ If it finds one, it suggests 2 to 3 outfits that pair the item with pieces from 
 
 -   session["query"]: the raw query string the user entered
 
+-   session["wardrobe"]: the wardrobe dict passed into run_agent
+
 -   session["parsed"]: dict with description, size, max_price
 
--   session["results"]: list returned by search_listings
+-   session["search_results"]: list returned by search_listings (called through MCP)
 
--   session["selected_item"]: the first dict in session["results"]
+-   Branch: if session["search_results"] is empty, set session["error"] and return. session["selected_item"], session["outfit_suggestion"], and session["fit_card"] stay None.
 
--   session["outfit"]: str returned by suggest_outfit(session["selected_item"], wardrobe)
+-   session["selected_item"]: the first dict in session["search_results"]
 
--   session["fit_card"]: str returned by create_fit_card(session["outfit"], session["selected_item"])
+-   session["outfit_suggestion"]: str returned by suggest_outfit(session["selected_item"], session["wardrobe"])
+
+-   session["fit_card"]: str returned by create_fit_card(session["outfit_suggestion"], session["selected_item"])
 
 ------------------------------------------------------------------------
 
@@ -144,7 +148,7 @@ If it finds one, it suggests 2 to 3 outfits that pair the item with pieces from 
 **One full query**
 
 ```         
-$ python app.py ask '...'
+$ python app.py ask 'vintage graphic tee under $30'
 [1] parse_query
       in:  vintage graphic tee under $30
       out: dict with keys: description, size, max_price
@@ -241,6 +245,14 @@ Scored these vintage Levi's 501 jeans for just $38 on depop and the wash is so g
 -   *What came back: They suggested the moves that I could check it.*
 -   *What I changed: I keep those in mind as I move on to the next milestone.*
 
+**Moment 3**
+
+-   *What I asked for: I asked why the criteria were all met.*
+
+-   *What came back: They suggested that #3 and #4 are the clearest cases that my criteria are loose. Stating that I picked the test queries myself and I likely used wording that matches the listings.*
+
+-   *What I changed: Write this in what's still broken and reflect on it.*
+
 ```{=html}
 <!-- ═══════════════════════ UNIT 4 — THE TEST ═══════════════════════
 
@@ -259,22 +271,224 @@ Scored these vintage Levi's 501 jeans for just $38 on depop and the wash is so g
      or FAIL, count the passes, and read that count against your target — a
      row targeting 4 of 5 with three PASS cells is MISSED (3/5).
 
-     `python run_eval.py --label before` runs everything and writes the table
+      python run_eval.py --label before  runs everything and writes the table
      into results/. Paste it here and fill in the verdicts. -->
 ```
 
-| Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
-|-----------|--------|-------|-------|-------|-------|-------|---------|
-| 1\.       |        |       |       |       |       |       |         |
-| 2\.       |        |       |       |       |       |       |         |
-| 3\.       |        |       |       |       |       |       |         |
-| 4\.       |        |       |       |       |       |       |         |
-| 5\.       |        |       |       |       |       |       |         |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| Criterion                                                  | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
++============================================================+========+=======+=======+=======+=======+=======+=========+
+| 1.  A matching query completes all three tools             | 4 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 2.  An impossible query stops before the second tool       | 5 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 3.  The searched item is the item suggest_outfit receives  | 5 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 4.  Something about the fit card                           | 5 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 5.  If the wardrobe is empty, returns not empty suggestion | 4 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
 
 **Real output from one try**, pasted as text, naming the file and function that produced it:
 
+Below are:
+
+:   Real output from one try, pasted from results/run_2026-10-12_2111_before.md (produced by run_eval.py::main , which calls agent.py::run_agent ; tools in tools.py ). Try 1 of each scenario.
+
+**Criterion 1:**
+
 ```         
+### matching query completes
+
+- Query:  vintage graphic tee under $30 
+- Wardrobe: example
+
+**Try 1**
+
+- stopped early: no
+- selected_item: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+- search_results: 10
+
+Outfit suggestion:
+
+   
+Outfit 1: Streetwear Contrast
+Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans, dark wash. Layer the black cropped zip hoodie unzipped over top. Finish with chunky white sneakers and the black crossbody bag to balance the fitted tee with the loose denim.
+
+Outfit 2: Casual Vintage
+Wear the Y2K Baby Tee — Butterfly Print tucked into your wide-leg khaki trousers. Add the vintage black denim jacket for an extra layer, and tie the look together with the brown leather belt and chunky white sneakers for an easy earth-toned everyday outfit.
+
+Outfit 3: Grunge Edge
+Style the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans, dark wash. Throw on the vintage black denim jacket and ground the sweet butterfly print with your black combat boots and the black crossbody bag for a sharp high-low mix.
+   
+
+Fit card:
+
+   
+Scored this sweet Y2K butterfly tee for just $18 on depop! Obsessed with the pink and purple print—gonna style it with baggy denim and combat boots for that perfect high-low grunge vibe. 🦋✨
+   
+
+Trace:
+
+   
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans, dark…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Scored this sweet Y2K butterfly tee for just $18 on depop! Obsessed with the pink and purple print—gonna style…
 ```
+
+**Criterion 2:**
+
+```         
+### impossible query stops early
+
+- Query:  designer ballgown size XXS under $5 
+- Wardrobe: example
+
+**Try 1**
+
+- stopped early: yes — Nothing in the listings matched description 'designer ballgown', size XXS, under $5.
+Things to change: try broader words — 'jacket' finds more than 'cropped corduroy jacket'; drop the size, or try a neighbouring one; raise the price ceiling above $5.
+- selected_item: (none)
+- search_results: 0
+
+Trace:
+
+   
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+```
+
+**Criterion 3 and 4:**
+
+```         
+Criteria 3 and 4, state check: belt, Try 1 (from  results/run_2026-10-12_2111_before.md , produced by  run_eval.py::main  calling  agent.py::run_agent):
+
+### state check: belt
+
+- Query:  black leather belt under $21 
+- Wardrobe: example
+
+**Try 1**
+
+- stopped early: no
+- selected_item: Leather Belt — Brown, Braided ($12.0, thredUp)
+- search_results: 3
+
+Outfit suggestion:
+
+   
+Outfit 1: Casual Denim
+Pair the Leather Belt — Brown, Braided with the baggy straight-leg jeans, dark wash, white ribbed tank top, vintage black denim jacket, and chunky white sneakers. Cinch the high-waisted jeans with the braided belt to break up the indigo denim and white tank, finishing with the cropped jacket and sneakers.
+
+Outfit 2: Earth Tone Minimalist
+Wear the Leather Belt — Brown, Braided with the wide-leg khaki trousers, white ribbed tank top, and black combat boots. Thread the brown belt through the khaki trousers for contrast against the fitted white tank, and anchor the look with the chunky black boots. 
+
+Outfit 3: Cozy Streetwear
+Style the Leather Belt — Brown, Braided with the baggy straight-leg jeans, black cropped zip hoodie, and black combat boots. Let the braided leather belt peek out below the cropped black hoodie to add texture to the dark wash jeans, paired with the lace-up boots.
+   
+
+Fit card:
+
+   
+Found this gorgeous vintage braided leather belt on thredUp for just $12! Obsessed with how the rich brown earth tones elevate a simple jeans and a tank combo. Such a versatile piece for fallback styling.
+   
+
+Trace:
+
+   
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[4] suggest_outfit
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Outfit 1: Casual Denim Pair the Leather Belt — Brown, Braided with the baggy straight-leg jeans, dark wash, wh…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Found this gorgeous vintage braided leather belt on thredUp for just $12! Obsessed with how the rich brown ear…
+      
+[suggest_outfit] received item id: lst_014 (retrieved from console_before.txt)
+```
+
+**Criterion 5:**
+
+````         
+### empty wardrobe
+
+- Query: `denim jacket under $50`
+- Wardrobe: empty
+
+**Try 1**
+
+- stopped early: no
+- selected_item: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+- search_results: 7
+
+Outfit suggestion:
+
+```
+Here are three ways to style your Wrangler Denim Jacket — Light Wash, Cropped. 
+
+Off-Duty Streetwear: Pair the jacket with black leggings, a white cotton t-shirt, and chunky sneakers. Add a baseball cap for an easy, everyday look.
+
+Retro Casual: Layer the cropped denim over a striped long-sleeve t-shirt tucked into straight-leg black jeans. Finish with canvas sneakers and a canvas tote bag.
+
+Dressed-Down Slip Dress: Throw the light wash jacket over a solid black midi slip dress and add worn-in white sneakers or ankle boots to balance the feminine silhouette with vintage texture.
+```
+
+Fit card:
+
+```
+Obsessed with this vintage cropped Wrangler denim jacket I just scored on Poshmark for $42! The light wash has that perfect broken-in feel for throwing over a slip dress or pairing with black leggings for off-duty days. Such a good find.
+```
+
+Trace:
+
+```
+[1] parse_query
+      in:  denim jacket under $50
+      out: {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 7 items: Denim Jacket — Light Wash, Cropped, High-Waisted Denim Shorts — Cutoff, Denim Vest — Medium Wash, Studded … +4 more
+      →    7 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Here are three ways to style your Wrangler Denim Jacket — Light Wash, Cropped.   Off-Duty Streetwear: Pair the…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Obsessed with this vintage cropped Wrangler denim jacket I just scored on Poshmark for $42! The light wash has…
+```
+````
 
 ------------------------------------------------------------------------
 
@@ -298,15 +512,33 @@ Scored these vintage Levi's 501 jeans for just $38 on depop and the wash is so g
      three. -->
 ```
 
-| \#  | Criterion | Target | Verdict | How I decided |
-|-----|-----------|--------|---------|---------------|
-| 1   |           |        |         |               |
-| 2   |           |        |         |               |
-| 3   |           |        |         |               |
-| 4   |           |        |         |               |
-| 5   |           |        |         |               |
++----+--------------------------------------------------------+---------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| \# | Criterion                                              | Target  | Verdict | How I decided                                                                                                                                                            |
++====+========================================================+=========+=========+==========================================================================================================================================================================+
+| 1  | A matching query completes all three tools             | 4 of 5  | MET     | All five tries ended with a fit card in session["fit_card"] and session["error"] still None.                                                                             |
++----+--------------------------------------------------------+---------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2  | An impossible query stops before the second tool       | 5 of 5  | MET     | All five traces end at step 3.                                                                                                                                           |
++----+--------------------------------------------------------+---------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3  | The searched item is the item suggest_outfit receives  | 5 of 5  | MET     | For each of the five queries, the id printed inside the suggest_outfit(console_before.txt) matched the listing id of session['selected_item] in all five runs, 25 of 25. |
++----+--------------------------------------------------------+---------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4  | Something about the fit card                           | 5 of 5  | MET     | All 25 fit cards for the five items show the exact price matching the listing price. No card needed the size fallback.                                                   |
++----+--------------------------------------------------------+---------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 5  | If the wardrobe is empty, returns not empty suggestion | 4 of 5  | MET     | All five outfit suggestions were non-empty and named the item by its title.                                                                                              |
++----+--------------------------------------------------------+---------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Diagnoses**
+
+(This is awkward... I thought I was very strict when I was writing the criteria...)
+
+No criterion was missed reading the results. I would say my targets are too easy because of the following reasons:
+
+-   Criterion 3 is deterministic paths and 5 of 5 was the only honest target the meeting was expected.
+
+-   Criterion 4 only checks prices in sizes so it passed even when a card had a different kind of problem: such as in Corduroy Try 3, the model output has added content. It was not asked for in one of 25 runs. ( " Buy recommendation: Yes...")
+
+-   Criterion 5 allowed the item's title "or a recognizable part of it". In the before run the model always used the full title, so the looser wording was never needed.
+
+    (In the after run it was needed twice: Try 1 and Try 4 called the item "Wrangler light wash, cropped denim jacket" instead of its title, but I still counted those as PASS under the wording I wrote.)
 
 ------------------------------------------------------------------------
 
@@ -315,7 +547,7 @@ Scored these vintage Levi's 501 jeans for just $38 on depop and the wash is so g
 ```{=html}
 <!-- One full run, printed step by step, with the MCP call visible in it.
 
-     `python app.py ask '...' --trace` once you've added the trace.step()
+      python app.py ask '...' --trace  once you've added the trace.step()
      calls in Milestone 2.
 
      Worth pasting BOTH the happy path and the empty-search path. The empty
@@ -327,17 +559,132 @@ Scored these vintage Levi's 501 jeans for just $38 on depop and the wash is so g
 **Happy path**
 
 ```         
+% python app.py ask 'vintage graphic tee under $30' --trace
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans. Laye…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Score this vintage butterfly baby tee for just $18 on Depop and I am obsessed. The pink and purple print gives…
 ```
 
 **Empty search**
 
 ```         
+% python app.py ask 'designer ballgown size XXS under $5' --trace
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+
+  Nothing in the listings matched description 'designer ballgown', size XXS, under $5.
+Things to change: try broader words — 'jacket' finds more than 'cropped corduroy jacket'; drop the size, or try a neighbouring one; raise the price ceiling above $5.
 ```
 
-**On the MCP move:** <!-- what changed in your code, and whether anything
-behaved differently afterwards. If the rewire didn't work, say exactly where it
-broke — the error text and the last thing that worked. That earns the point in
-full. -->
+**On the MCP move:**
+
+Following the code from the class, I modified the agent.py: \_search() now calls mcp_client.call_tool("search_listings", ...) instead of calling the function directly, and I removed the starter's fallback to a direct call so that a broken MCP connection raises instead of being hidden.
+
+And I also registered search_listings in mcp_server.py with a typed contract and a description that states the matching rules and the empty case.
+
+Nothing behaved differently afterwards, I got the same results in the same order with the same query.
+
+**Triggering failures:**
+
+-   Empty search:
+
+```         
+python app.py ask 'designer ballgown size XXS under $5'
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+
+  Nothing in the listings matched description 'designer ballgown', size XXS, under $5.
+Things to change: try broader words — 'jacket' finds more than 'cropped corduroy jacket'; drop the size, or try a neighbouring one; raise the price ceiling above $5.
+```
+
+-   Empty wardrobe:
+
+```         
+python app.py ask 'vintage graphic tee under $30' --empty-wardrobe
+(running with an empty wardrobe)
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Here are three outfit ideas for the Y2K Baby Tee — Butterfly Print:  1. Casual Streetwear: Pair the baby tee w…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Found this dreamy butterfly baby tee thrifting and I am so obsessed with the pink and purple print! Just liste…
+
+  Found:    Y2K Baby Tee — Butterfly Print — $18.0 on depop
+
+  Outfit:   Here are three outfit ideas for the Y2K Baby Tee — Butterfly Print:
+
+1. Casual Streetwear: Pair the baby tee with high-waisted medium-wash straight-leg jeans, white canvas sneakers, and a small shoulder bag for an easy everyday look.
+
+2. Y2K Edge: Layer the baby tee over a long-sleeve black mesh top, add a pleated black mini skirt, knee-high boots, and a chunky silver chain necklace.
+
+3. Soft Cottagecore: Tuck the baby tee into an olive green utility midi skirt, slip on brown leather clogs, and wear a simple cardigan over your shoulders for cooler weather.
+
+  Fit card: Found this dreamy butterfly baby tee thrifting and I am so obsessed with the pink and purple print! Just listed it on depop for $18. Can't wait to style it with straight-leg jeans for an easy streetwear look or layer it over mesh for total Y2K vibes. 🦋✨
+
+2 model calls this session, 465 prompt + 197 output tokens
+```
+
+-   Model unavailable:
+
+```         
+AI201_CACHE=0 python app.py ask 'black leather belt under $21'
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[suggest_outfit] received item id: lst_014
+[4] model unavailable
+      →    stopping, search results kept
+
+  The model couldn't be reached, so the outfit and caption steps didn't run. The search worked — 3 listing(s) were found. Check GEMINI_API_KEY in your .env, then run the same query again.
+What the service said: The model rejected your API key. Check GEMINI_API_KEY in your .env file, or create a fresh key at aistudio.google.com.
+
+1 model calls this session
+```
 
 ------------------------------------------------------------------------
 
@@ -347,28 +694,40 @@ full. -->
 <!-- What you changed, why your diagnosis pointed at it, and the after-run in
      the same table format. One change, measured properly.
 
-     `python run_eval.py --label after` -->
+      python run_eval.py --label after  -->
 ```
 
 **What I changed:**
 
+After the loop picks session["selected_item"], a new function, \_color_mismatch(), checks whether the user's description contains a color word (black, brown, navy, and so on) that does not appear in the chosen item's title or colors. If it finds one, it stores a message in a new session field, session["note"], and records a check_color step in the trace.
+
 **Which failure it was meant to fix:**
+
+It was meant to fix the fact that the agent silently returns a different color than the user asked for. For "black leather belt under \$21", all five runs selected the braided brown leather belt (lst_014). That is the only belt in data, and the only black leather item is a \$75 bomber jacket (lst_022), so search_listings returned the closest match, which is correct for a keyword search. The failure is in the loop: run_agent takes the first result without checking it against what the user asked for, so the user gets a brown belt, three outfits, and a caption with no sign that it is not black.
 
 ### Run Log — After
 
-| Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
-|-----------|--------|-------|-------|-------|-------|-------|---------|
-| 1\.       |        |       |       |       |       |       |         |
-| 2\.       |        |       |       |       |       |       |         |
-| 3\.       |        |       |       |       |       |       |         |
-| 4\.       |        |       |       |       |       |       |         |
-| 5\.       |        |       |       |       |       |       |         |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| Criterion                                                  | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
++============================================================+========+=======+=======+=======+=======+=======+=========+
+| 1.  A matching query completes all three tools             | 4 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 2.  An impossible query stops before the second tool       | 5 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 3.  The searched item is the item suggest_outfit receives  | 5 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 4.  Something about the fit card                           | 5 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
+| 5.  If the wardrobe is empty, returns not empty suggestion | 4 of 5 | pass  | pass  | pass  | pass  | pass  | MET     |
++------------------------------------------------------------+--------+-------+-------+-------+-------+-------+---------+
 
 **Did it help, and how do I know:**
 
 ```{=html}
 <!-- If it made things worse, say that. Honestly reported, that earns full
      credit and is more interesting than one that worked. -->
+     Scored the same way as the before run: for criteria 3 and 4, each try is one of the five queries, and a query passes only if all five of its runs pass. All five criteria are still MET, so the change did not break anything it was not meant to touch. It only partly fixes the user's experience, though. 
+     In the before run, none of the five belt runs told the user the belt was brown. In the after run, all five did, with a check_color step right after select_item: "No black match was found, so this is the closest match instead. Its color is brown." 
 ```
 
 ------------------------------------------------------------------------
@@ -379,6 +738,8 @@ full. -->
 <!-- For each criterion still missed: what you'd do, and why you stopped where
      you did. "I ran out of time" is fine if it's true. Pretending nothing is
      left is not. -->
+     * The parser ignores written-out sizes: "small", "medium", and "large" are not read as sizes, so the size is silently dropped. The fix is to map those words to S, M, and L in agent.py::parse_query. I did not pick it as my improvement because no scenario in my before run used a written-out size, so I could not have measured the change against it.
+     * My color warning is only in the trace. The message is stored in session["note"] and printed as a trace step, but the summary lines do not show it, and suggest_outfit and create_fit_card are not told about it, so the fit card still presents the brown belt as a great find. 
 ```
 
 ```{=html}
