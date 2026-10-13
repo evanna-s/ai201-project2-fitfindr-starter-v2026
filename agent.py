@@ -29,6 +29,7 @@ def new_session(query: str, wardrobe: dict) -> dict:
         "outfit_suggestion": None,   # what suggest_outfit returned
         "fit_card": None,            # what create_fit_card returned
         "error": None,               # set when the run ended early
+        "note": None,                # set when the chosen item doesn't match a color the user asked for
     }
 
 
@@ -81,30 +82,24 @@ def parse_query(query: str) -> dict:
 
 def _search(parsed: dict) -> list[dict]:
     """
-    Call search_listings — over MCP when the server has it registered.
+    Call search_listings through the MCP server.
 
-    ⚠️ UNIT 4, MILESTONE 1. In unit 3 this function does not exist and
-    `run_agent` calls `search_listings(...)` directly. The fallback is not
-    belt-and-braces for its own sake: `python agent.py` has to keep working
-    while the MCP side is half-built, and a student whose 40 minutes ran out
-    still needs the rest of the week to run.
+    There is no direct-call fallback: if the MCP server is not reachable or
+    the tool is not registered, this raises, so a broken MCP connection
+    shows up immediately instead of being hidden.
     """
-    try:
-        from mcp_client import call_tool
 
-        results = call_tool(
-            "search_listings",
-            {
-                "description": parsed["description"],
-                "size": parsed["size"],
-                "max_price": parsed["max_price"],
-            },
-        )
-        return results or []
-    except Exception:  # noqa: BLE001 — MCP unavailable is not a user-facing error
-        return search_listings(
-            parsed["description"], parsed["size"], parsed["max_price"]
-        )
+    from mcp_client import call_tool
+
+    results = call_tool(
+        "search_listings",
+        {
+            "description": parsed["description"],
+            "size": parsed["size"],
+            "max_price": parsed["max_price"],
+        },
+    )
+    return results or []
 
 
 def run_agent(query: str, wardrobe: dict) -> dict:
@@ -139,7 +134,7 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         trace.check_iterations(steps)
         parsed = parse_query(query)
         session["parsed"] = parsed
-        trace.step("parse_query", inputs=query, returned=parsed)
+        trace.step("parse_query", inputs=query, returned=str(parsed))
 
         steps += 1
         trace.check_iterations(steps)
@@ -147,7 +142,7 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         session["search_results"] = results
         trace.step(
             "search_listings (via MCP)",
-            inputs=parsed,
+            inputs=str(parsed),
             returned=results,
             note=f"{len(results)} match(es)",
         )
@@ -165,6 +160,10 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         trace.check_iterations(steps)
         session["selected_item"] = results[0]
         trace.step("select_item", returned=session["selected_item"])
+        # ── second branch: warn when the chosen item isn't the color asked for ──
+        session["note"] = _color_mismatch(parsed, session["selected_item"])
+        if session["note"]:
+            trace.step("check_color", note=session["note"])
 
         steps += 1
         trace.check_iterations(steps)
@@ -200,6 +199,35 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         trace.step("model unavailable", note="stopping, search results kept")
 
     return session
+
+# ── second branch: does the chosen item match the color asked for? ───────────
+
+_COLOR_WORDS = {
+    "black", "white", "brown", "red", "blue", "navy", "green", "grey", "gray",
+    "pink", "purple", "cream", "tan", "khaki", "olive", "burgundy", "rust",
+    "yellow", "orange", "beige",
+}
+
+
+def _color_mismatch(parsed: dict, item: dict) -> str | None:
+    asked = [w for w in re.findall(r"[a-z]+", (parsed.get("description") or "").lower())
+             if w in _COLOR_WORDS]
+    if not asked:
+        return None
+
+    item_words = set(re.findall(
+        r"[a-z]+",
+        " ".join([item.get("title") or "", " ".join(item.get("colors") or [])]).lower(),
+    ))
+    missing = [c for c in asked if c not in item_words]
+    if not missing:
+        return None
+
+    actual = ", ".join(item.get("colors") or []) or "not listed"
+    return (
+        f"No {' or '.join(missing)} match was found, so this is the closest "
+        f"match instead. Its color is {actual}."
+    )
 
 
 def _nothing_found_message(parsed: dict) -> str:
