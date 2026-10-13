@@ -1,0 +1,710 @@
+Cache is OFF for this run — that's deliberate.
+
+matching query completes  (example wardrobe)
+  query: vintage graphic tee under $30
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans, dark…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Scored this sweet Y2K butterfly tee for just $18 on depop! Obsessed with the pink and purple print—gonna style…
+  try 1: completed — fit card 189 chars
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with the baggy straight-leg jeans, dark …
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Found the ultimate butterfly baby tee for just $18 on depop! Obsessed with this pink and purple Y2K print. Can…
+  try 2: completed — fit card 196 chars
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with your baggy straight-leg jeans, dark…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Found the ultimate Y2K butterfly baby tee and I’m obsessed. Snagged it on depop for just $18 and the print is …
+  try 3: completed — fit card 185 chars
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Streetwear Contrast Pair the Y2K Baby Tee — Butterfly Print with baggy straight-leg jeans, dark wash…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Found this dreamy Y2K butterfly baby tee thrifting and I'm obsessed with the pastel print. Snagged it on depop…
+  try 4: completed — fit card 231 chars
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 10 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Graphic Tee — 2003 Tour Bootleg Style … +7 more
+      →    10 match(es)
+[3] select_item
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+[suggest_outfit] received item id: lst_002
+[4] suggest_outfit
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Outfit 1: Y2K Streetwear Pair the Y2K Baby Tee — Butterfly Print with your Baggy straight-leg jeans, dark wash…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      out: Found this dream butterfly Y2K baby tee on depop for just $18 and I'm obsessed. Can't wait to style it with ba…
+  try 5: completed — fit card 176 chars
+
+impossible query stops early  (example wardrobe)
+  query: designer ballgown size XXS under $5
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+  try 1: stopped early — Nothing in the listings matched description 'designer ballgo
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+  try 2: stopped early — Nothing in the listings matched description 'designer ballgo
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+  try 3: stopped early — Nothing in the listings matched description 'designer ballgo
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+  try 4: stopped early — Nothing in the listings matched description 'designer ballgo
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+  try 5: stopped early — Nothing in the listings matched description 'designer ballgo
+
+state check: belt  (example wardrobe)
+  query: black leather belt under $21
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[suggest_outfit] received item id: lst_014
+[4] suggest_outfit
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Outfit 1: Casual Denim Pair the Leather Belt — Brown, Braided with the baggy straight-leg jeans, dark wash, wh…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Found this gorgeous vintage braided leather belt on thredUp for just $12! Obsessed with how the rich brown ear…
+  try 1: completed — fit card 204 chars
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[suggest_outfit] received item id: lst_014
+[4] suggest_outfit
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Outfit 1: Casual Denim Pair the Leather Belt — Brown, Braided with Baggy straight-leg jeans, dark wash and Whi…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Scored this vintage braided brown leather belt on thredUp for just $12, and it’s the ultimate piece for tying …
+  try 2: completed — fit card 220 chars
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[suggest_outfit] received item id: lst_014
+[4] suggest_outfit
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Outfit 1 Pair the Leather Belt — Brown, Braided with Baggy straight-leg jeans, dark wash, White ribbed tank to…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Scored this vintage braided leather belt on thredUp for just $12 and it’s the ultimate finishing touch. Love h…
+  try 3: completed — fit card 232 chars
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[suggest_outfit] received item id: lst_014
+[4] suggest_outfit
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Outfit 1: Pair the Leather Belt — Brown, Braided with Baggy straight-leg jeans, dark wash, White ribbed tank t…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Scored this gorgeous braided leather belt on thredUp for just $12! It's the ultimate finishing touch for high-…
+  try 4: completed — fit card 202 chars
+[1] parse_query
+      in:  black leather belt under $21
+      out: {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'black leather belt', 'size': None, 'max_price': 21.0}
+      out: 3 items: Leather Belt — Brown, Braided, Biker Shorts — Black, Shiny, Mesh Long-Sleeve Top — Black
+      →    3 match(es)
+[3] select_item
+      out: Leather Belt — Brown, Braided ($12.0, thredUp)
+[suggest_outfit] received item id: lst_014
+[4] suggest_outfit
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Outfit 1: Casual Denim Pair the Leather Belt — Brown, Braided with the baggy straight-leg jeans, dark wash, wh…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Leather Belt — Brown, Braided ($12.0, thredUp)
+      out: Scored this vintage braided brown leather belt on thredUp for just $12 and it’s about to live on loop with all…
+  try 5: completed — fit card 183 chars
+
+state check: corduroy pants  (example wardrobe)
+  query: corduroy wide-leg pants
+[1] parse_query
+      in:  corduroy wide-leg pants
+      out: {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+      out: 5 items: Corduroy Wide-Leg Pants — Rust, Wide-Leg Linen Trousers — Natural, Low-Rise Cargo Pants — Khaki … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+[suggest_outfit] received item id: lst_005
+[4] suggest_outfit
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Outfit 1: Corduroy Wide-Leg Pants — Rust White ribbed tank top Vintage black denim jacket Chunky white sneaker…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Scored these vintage rust corduroy pants on Depop for just $32 and I'm obsessed with the 70s earth tones. Can’…
+  try 1: completed — fit card 237 chars
+[1] parse_query
+      in:  corduroy wide-leg pants
+      out: {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+      out: 5 items: Corduroy Wide-Leg Pants — Rust, Wide-Leg Linen Trousers — Natural, Low-Rise Cargo Pants — Khaki … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+[suggest_outfit] received item id: lst_005
+[4] suggest_outfit
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Outfit 1 Pair the Corduroy Wide-Leg Pants — Rust with the white ribbed tank top tucked in. Add the vintage bla…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Obsessed with the rust color on these vintage corduroy wide-leg pants. Snagged them on Depop for $32 and they …
+  try 2: completed — fit card 231 chars
+[1] parse_query
+      in:  corduroy wide-leg pants
+      out: {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+      out: 5 items: Corduroy Wide-Leg Pants — Rust, Wide-Leg Linen Trousers — Natural, Low-Rise Cargo Pants — Khaki … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+[suggest_outfit] received item id: lst_005
+[4] suggest_outfit
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Outfit One: 70s Casual Corduroy Wide-Leg Pants — Rust paired with White ribbed tank top, Vintage black denim j…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Scored these rust corduroy wide-legs on depop for $32 and they are officially my fall uniform. Obsessed with t…
+  try 3: completed — fit card 240 chars
+[1] parse_query
+      in:  corduroy wide-leg pants
+      out: {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+      out: 5 items: Corduroy Wide-Leg Pants — Rust, Wide-Leg Linen Trousers — Natural, Low-Rise Cargo Pants — Khaki … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+[suggest_outfit] received item id: lst_005
+[4] suggest_outfit
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Outfit 1: 70s Coffee Run - Corduroy Wide-Leg Pants — Rust - White ribbed tank top - Vintage black denim jacket…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Score! Found these vintage rust corduroy wide-legs on depop for just $32. Obsessed with the 70s earth tone vib…
+  try 4: completed — fit card 207 chars
+[1] parse_query
+      in:  corduroy wide-leg pants
+      out: {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'corduroy wide-leg pants', 'size': None, 'max_price': None}
+      out: 5 items: Corduroy Wide-Leg Pants — Rust, Wide-Leg Linen Trousers — Natural, Low-Rise Cargo Pants — Khaki … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+[suggest_outfit] received item id: lst_005
+[4] suggest_outfit
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Outfit One: Retro Casual Pair the Corduroy Wide-Leg Pants — Rust with the white ribbed tank top tucked in. Add…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      out: Obsessed with the rust corduroy wide-leg pants I just scored on Depop for $32! They give off the ultimate 70s …
+  try 5: completed — fit card 245 chars
+
+state check: track jacket  (example wardrobe)
+  query: track jacket
+[1] parse_query
+      in:  track jacket
+      out: {'description': 'track jacket', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'track jacket', 'size': None, 'max_price': None}
+      out: 4 items: 90s Track Jacket — Navy/White Stripe, Denim Jacket — Light Wash, Cropped, Shacket — Olive Canvas … +1 more
+      →    4 match(es)
+[3] select_item
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+[suggest_outfit] received item id: lst_004
+[4] suggest_outfit
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Outfit 1: Streetwear Casual Pair the 90s Track Jacket — Navy/White Stripe with the white ribbed tank top, bagg…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Scored this vintage Champion 90s track jacket on Poshmark for just $45 and I'm obsessed. The navy and white st…
+  try 1: completed — fit card 219 chars
+[1] parse_query
+      in:  track jacket
+      out: {'description': 'track jacket', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'track jacket', 'size': None, 'max_price': None}
+      out: 4 items: 90s Track Jacket — Navy/White Stripe, Denim Jacket — Light Wash, Cropped, Shacket — Olive Canvas … +1 more
+      →    4 match(es)
+[3] select_item
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+[suggest_outfit] received item id: lst_004
+[4] suggest_outfit
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Outfit 1: Streetwear Casual Pair the 90s Track Jacket — Navy/White Stripe over the white ribbed tank top and b…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Scored this vintage Champion 90s track jacket on Poshmark for just $45! Obsessed with how sporty it looks toss…
+  try 2: completed — fit card 217 chars
+[1] parse_query
+      in:  track jacket
+      out: {'description': 'track jacket', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'track jacket', 'size': None, 'max_price': None}
+      out: 4 items: 90s Track Jacket — Navy/White Stripe, Denim Jacket — Light Wash, Cropped, Shacket — Olive Canvas … +1 more
+      →    4 match(es)
+[3] select_item
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+[suggest_outfit] received item id: lst_004
+[4] suggest_outfit
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Outfit One: Casual Streetwear Pair the 90s Track Jacket — Navy/White Stripe zipped over the white ribbed tank …
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Scored this vintage Champion 90s track jacket on Poshmark for just $45 and I'm obsessed with the sporty street…
+  try 3: completed — fit card 245 chars
+[1] parse_query
+      in:  track jacket
+      out: {'description': 'track jacket', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'track jacket', 'size': None, 'max_price': None}
+      out: 4 items: 90s Track Jacket — Navy/White Stripe, Denim Jacket — Light Wash, Cropped, Shacket — Olive Canvas … +1 more
+      →    4 match(es)
+[3] select_item
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+[suggest_outfit] received item id: lst_004
+[4] suggest_outfit
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Outfit 1: Casual streetwear Top: White ribbed tank top Bottoms: Baggy straight-leg jeans, dark wash Outerwear:…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Scored this vintage Champion track jacket on Poshmark for just $45 and I'm obsessed. It has the ultimate 90s a…
+  try 4: completed — fit card 222 chars
+[1] parse_query
+      in:  track jacket
+      out: {'description': 'track jacket', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'track jacket', 'size': None, 'max_price': None}
+      out: 4 items: 90s Track Jacket — Navy/White Stripe, Denim Jacket — Light Wash, Cropped, Shacket — Olive Canvas … +1 more
+      →    4 match(es)
+[3] select_item
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+[suggest_outfit] received item id: lst_004
+[4] suggest_outfit
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Outfit 1: Streetwear Casual Pair the 90s Track Jacket — Navy/White Stripe over the white ribbed tank top, comb…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Scored this vintage Champion 90s track jacket for $45 on Poshmark and I’m obsessed. It’s got that ultimate spo…
+  try 5: completed — fit card 219 chars
+
+state check: slip dress  (example wardrobe)
+  query: silk slip dress
+[1] parse_query
+      in:  silk slip dress
+      out: {'description': 'silk slip dress', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'silk slip dress', 'size': None, 'max_price': None}
+      out: 2 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green
+      →    2 match(es)
+[3] select_item
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+[suggest_outfit] received item id: lst_013
+[4] suggest_outfit
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Outfit 1: Grunge Contrast Layer the 90s Silk Slip Dress over the white ribbed tank top. Add the black combat b…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Finally snagged this dreamy 90s floral slip dress for just $30 on depop! Obsessed with how it looks toughened …
+  try 1: completed — fit card 207 chars
+[1] parse_query
+      in:  silk slip dress
+      out: {'description': 'silk slip dress', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'silk slip dress', 'size': None, 'max_price': None}
+      out: 2 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green
+      →    2 match(es)
+[3] select_item
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+[suggest_outfit] received item id: lst_013
+[4] suggest_outfit
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Outfit 1: Grunge Contrast Layer the 90s Silk Slip Dress over the white ribbed tank top. Add the black combat b…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Found this dreamy 90s floral silk slip on depop for $30 and I’m obsessed with the cottagecore meets grunge vib…
+  try 2: completed — fit card 183 chars
+[1] parse_query
+      in:  silk slip dress
+      out: {'description': 'silk slip dress', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'silk slip dress', 'size': None, 'max_price': None}
+      out: 2 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green
+      →    2 match(es)
+[3] select_item
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+[suggest_outfit] received item id: lst_013
+[4] suggest_outfit
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Outfit 1: Grunge Contrast Layer the 90s Silk Slip Dress over the white ribbed tank top. Finish with the black …
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Obsessed with this 90s floral silk slip dress! Scored it on depop for just $30 and I've already planned three …
+  try 3: completed — fit card 211 chars
+[1] parse_query
+      in:  silk slip dress
+      out: {'description': 'silk slip dress', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'silk slip dress', 'size': None, 'max_price': None}
+      out: 2 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green
+      →    2 match(es)
+[3] select_item
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+[suggest_outfit] received item id: lst_013
+[4] suggest_outfit
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Outfit 1: Grunge Contrast Layer the 90s Silk Slip Dress — Floral, Midi Length over your white ribbed tank top.…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Found this 90s floral silk slip dress on depop for $30 and I’m obsessed with the dusty pink and green print. C…
+  try 4: completed — fit card 201 chars
+[1] parse_query
+      in:  silk slip dress
+      out: {'description': 'silk slip dress', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'silk slip dress', 'size': None, 'max_price': None}
+      out: 2 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green
+      →    2 match(es)
+[3] select_item
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+[suggest_outfit] received item id: lst_013
+[4] suggest_outfit
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Outfit 1: Grunge Contrast Layer the 90s Silk Slip Dress over the white ribbed tank top. Add the black combat b…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Obsessed with this floral 90s slip dress I just scored on Depop for $30! It’s the ultimate grunge-meets-fairy …
+  try 5: completed — fit card 185 chars
+
+state check: cardigan  (example wardrobe)
+  query: knit cardigan
+[1] parse_query
+      in:  knit cardigan
+      out: {'description': 'knit cardigan', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'knit cardigan', 'size': None, 'max_price': None}
+      out: 2 items: Knit Cardigan — Chunky Brown, Vintage Knit Vest — Argyle Brown/Cream
+      →    2 match(es)
+[3] select_item
+      out: Knit Cardigan — Chunky Brown ($35.0, depop)
+[suggest_outfit] received item id: lst_008
+[4] suggest_outfit
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Outfit 1: Casual Streetwear Pair the Knit Cardigan — Chunky Brown over the white ribbed tank top and baggy str…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Found my ultimate cozy cottagecore cardigan on depop for just $35! It’s super chunky and the perfect earth ton…
+  try 1: completed — fit card 208 chars
+[1] parse_query
+      in:  knit cardigan
+      out: {'description': 'knit cardigan', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'knit cardigan', 'size': None, 'max_price': None}
+      out: 2 items: Knit Cardigan — Chunky Brown, Vintage Knit Vest — Argyle Brown/Cream
+      →    2 match(es)
+[3] select_item
+      out: Knit Cardigan — Chunky Brown ($35.0, depop)
+[suggest_outfit] received item id: lst_008
+[4] suggest_outfit
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Outfit 1: Casual Streetwear Pair the Knit Cardigan — Chunky Brown over the white ribbed tank top, tucked into …
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Found my new favorite chunky brown knit cardigan on depop for just $35! It's giving major oversized cottagecor…
+  try 2: completed — fit card 220 chars
+[1] parse_query
+      in:  knit cardigan
+      out: {'description': 'knit cardigan', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'knit cardigan', 'size': None, 'max_price': None}
+      out: 2 items: Knit Cardigan — Chunky Brown, Vintage Knit Vest — Argyle Brown/Cream
+      →    2 match(es)
+[3] select_item
+      out: Knit Cardigan — Chunky Brown ($35.0, depop)
+[suggest_outfit] received item id: lst_008
+[4] suggest_outfit
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Outfit One: Coffee and Cream Pair the Knit Cardigan — Chunky Brown over the White ribbed tank top and Wide-leg…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Obsessed with this chunky brown knit I just scored on depop for $35! It’s the ultimate cozy cottagecore layer …
+  try 3: completed — fit card 201 chars
+[1] parse_query
+      in:  knit cardigan
+      out: {'description': 'knit cardigan', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'knit cardigan', 'size': None, 'max_price': None}
+      out: 2 items: Knit Cardigan — Chunky Brown, Vintage Knit Vest — Argyle Brown/Cream
+      →    2 match(es)
+[3] select_item
+      out: Knit Cardigan — Chunky Brown ($35.0, depop)
+[suggest_outfit] received item id: lst_008
+[4] suggest_outfit
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Outfit 1: Casual Streetwear Pair the Knit Cardigan — Chunky Brown over the white ribbed tank top and baggy str…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Obsessed with this chunky brown knit cardigan I just listed on depop for $35! It’s the ultimate oversized cott…
+  try 4: completed — fit card 200 chars
+[1] parse_query
+      in:  knit cardigan
+      out: {'description': 'knit cardigan', 'size': None, 'max_price': None}
+[2] search_listings (via MCP)
+      in:  {'description': 'knit cardigan', 'size': None, 'max_price': None}
+      out: 2 items: Knit Cardigan — Chunky Brown, Vintage Knit Vest — Argyle Brown/Cream
+      →    2 match(es)
+[3] select_item
+      out: Knit Cardigan — Chunky Brown ($35.0, depop)
+[suggest_outfit] received item id: lst_008
+[4] suggest_outfit
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: Outfit 1: Casual Streetwear Pair the Knit Cardigan — Chunky Brown over the white ribbed tank top and baggy str…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Knit Cardigan — Chunky Brown ($35.0, depop)
+      out: scored this chunky brown knit cardigan on depop for $35 and it’s the ultimate cozy cottagecore layer. obsessed…
+  try 5: completed — fit card 206 chars
+
+empty wardrobe  (empty wardrobe)
+  query: denim jacket under $50
+[1] parse_query
+      in:  denim jacket under $50
+      out: {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 7 items: Denim Jacket — Light Wash, Cropped, High-Waisted Denim Shorts — Cutoff, Denim Vest — Medium Wash, Studded … +4 more
+      →    7 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[suggest_outfit] received item id: lst_007
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Here are three ways to style your Wrangler Denim Jacket — Light Wash, Cropped.   Off-Duty Streetwear: Pair the…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Obsessed with this vintage cropped Wrangler denim jacket I just scored on Poshmark for $42! The light wash has…
+  try 1: completed — fit card 237 chars
+[1] parse_query
+      in:  denim jacket under $50
+      out: {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 7 items: Denim Jacket — Light Wash, Cropped, High-Waisted Denim Shorts — Cutoff, Denim Vest — Medium Wash, Studded … +4 more
+      →    7 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[suggest_outfit] received item id: lst_007
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Here are three ways to style your Wrangler Denim Jacket — Light Wash, Cropped.  Idea 1: Off-duty casual. Throw…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Score! Snagged this cropped vintage Wrangler denim jacket on Poshmark for just $42. Can't wait to throw it ove…
+  try 2: completed — fit card 192 chars
+[1] parse_query
+      in:  denim jacket under $50
+      out: {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 7 items: Denim Jacket — Light Wash, Cropped, High-Waisted Denim Shorts — Cutoff, Denim Vest — Medium Wash, Studded … +4 more
+      →    7 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[suggest_outfit] received item id: lst_007
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Here are three ways to style your Denim Jacket — Light Wash, Cropped:  1. Casual Streetwear: Pair the jacket w…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Score! Snagged this vintage Wrangler cropped denim jacket on Poshmark for just $42. It’s in amazing shape and …
+  try 3: completed — fit card 203 chars
+[1] parse_query
+      in:  denim jacket under $50
+      out: {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 7 items: Denim Jacket — Light Wash, Cropped, High-Waisted Denim Shorts — Cutoff, Denim Vest — Medium Wash, Studded … +4 more
+      →    7 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[suggest_outfit] received item id: lst_007
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: The Denim Jacket — Light Wash, Cropped is a versatile vintage staple that easily elevates basic pieces.   Firs…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Score! Found this vintage Wrangler cropped denim jacket on Poshmark for just $42. Can't wait to style it over …
+  try 4: completed — fit card 176 chars
+[1] parse_query
+      in:  denim jacket under $50
+      out: {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 7 items: Denim Jacket — Light Wash, Cropped, High-Waisted Denim Shorts — Cutoff, Denim Vest — Medium Wash, Studded … +4 more
+      →    7 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[suggest_outfit] received item id: lst_007
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: For an effortless off-duty look, pair the Denim Jacket — Light Wash, Cropped with a plain white t-shirt, black…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Just scored this vintage Wrangler cropped denim jacket on Poshmark for $42 and I’m obsessed. It has the absolu…
+  try 5: completed — fit card 265 chars
+
+Wrote results/run_2026-10-12_2111_before.md
+70 model calls this session, 26933 prompt + 7790 output tokens
+
+Commit this file. It's the evidence the test actually happened.
